@@ -90,7 +90,7 @@ details p,details li{font-size:14px}
   <main id="form">
     <span class="badge">Einwilligung</span>
     <h1>Einwilligung zur Erstellung von Fotoaufnahmen</h1>
-    <p class="lead">Bitte füllen Sie das Formular aus und unterschreiben Sie mit dem Finger. Am Ende tippen Sie auf „Speichern &amp; an Foto Schuh senden“. Eine Kopie erhalten Sie auf Wunsch von uns.</p>
+    <p class="lead">Bitte füllen Sie das Formular aus und unterschreiben Sie mit dem Finger. Am Ende tippen Sie auf „Speichern &amp; an Foto Schuh senden“. <span id="lead_copy">Eine Kopie können Sie sich dabei selbst mitschicken.</span></p>
     <div class="warnbox">Ohne Einwilligung können keine Fotos gemacht werden.</div>
 
     <section class="card">
@@ -103,7 +103,8 @@ details p,details li{font-size:14px}
         <div class="full"><label for="f_str">Straße und Hausnummer *</label><input id="f_str" autocomplete="off"></div>
         <div><label for="f_plz">PLZ *</label><input id="f_plz" inputmode="numeric" maxlength="5" autocomplete="off"></div>
         <div><label for="f_ort">Ort *</label><input id="f_ort" autocomplete="off" autocapitalize="words"></div>
-        <div><label for="f_mail">E-Mail-Adresse</label><input id="f_mail" type="email" inputmode="email" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+        <div><label for="f_mail">E-Mail-Adresse</label><input id="f_mail" type="email" inputmode="email" autocomplete="off" autocapitalize="off" spellcheck="false">
+          <label class="check" id="copy_row" style="margin:8px 0 0"><input type="checkbox" id="c_copy"><span>Kopie an mich senden</span></label></div>
         <div><label for="f_tel">Telefonnummer</label><input id="f_tel" type="tel" inputmode="tel" autocomplete="off"></div>
         <p class="note full" style="margin:0">Bitte mindestens E-Mail-Adresse oder Telefonnummer angeben.</p>
         <div class="full"><label for="f_kids">Mitfotografierte Kinder unter 18 <span style="font-weight:400">(nur ausfüllen, wenn Kinder mit fotografiert werden)</span></label>
@@ -146,12 +147,12 @@ details p,details li{font-size:14px}
   <main id="done" hidden>
     <span class="badge">Fertig</span>
     <h1>Vielen Dank!</h1>
-    <div class="msg ok">Ihre Einwilligung ist unterschrieben. Jetzt nur noch an Foto Schuh senden.</div>
+    <div class="msg ok">Ihre Einwilligung ist unterschrieben. Jetzt nur noch an Foto Schuh senden.<span id="d_qrnote" hidden> Eine Kopie finden Sie danach in Ihrem Mail-Ordner „Gesendet“.</span></div>
     <section class="card">
       <h2>An Foto Schuh senden</h2>
       <ol class="steps">
         <li>Auf <strong>„Speichern &amp; an Foto Schuh senden“</strong> tippen und <strong>Mail</strong> auswählen.</li>
-        <li>Ins Feld <strong>„An“</strong> tippen und <strong>Einsetzen</strong> wählen. Die Adresse ist schon kopiert:<br>
+        <li>Ins Feld <strong>„An“</strong> tippen und <strong>Einsetzen</strong> wählen. <span id="d_rcpt_lbl">Die Adresse ist schon kopiert:</span><br>
           <span class="code" id="d_rcpt"></span></li>
         <li>Auf <strong>Senden</strong> tippen.</li>
       </ol>
@@ -162,7 +163,7 @@ details p,details li{font-size:14px}
       </div>
       <p class="note" id="d_noshare" hidden>Dieses Gerät kann die PDF nicht direkt teilen. Bitte „PDF speichern“ und in der Mail-App als Anhang anfügen.</p>
     </section>
-    <section class="card">
+    <section class="card" id="next_card">
       <h2>Nächster Kunde</h2>
       <p class="note">Erst tippen, wenn die Mail verschickt ist. Alle Angaben und die PDF werden dann vom Gerät gelöscht.</p>
       <div class="actions"><button type="button" class="ghost" id="b_next">Neues Formular</button></div>
@@ -201,7 +202,7 @@ const HINWEISE = () => [
     "• Kontaktaufnahme über den Auftrag hinaus, Benachrichtigungen und Erinnerungen – auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).",
     "• Veröffentlichung von Bildern als Referenz nur mit Ihrer gesonderten Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).",
     "• Erfüllung gesetzlicher Pflichten, z. B. Aufbewahrung von Rechnungen (Art. 6 Abs. 1 lit. c DSGVO)."] },
-  { h: "4. Wer die Daten erhält", p: ["Daten geben wir nur weiter, soweit das für den Auftrag oder gesetzlich nötig ist: an Portraitbox (Portraitbox GmbH) für die passwortgeschützte Online-Galerie und Bestellungen, an Fotolabore bei bestellten Abzügen oder Produkten, bei Kartenzahlung an Zettle by PayPal, beim Versand großer Bilddateien an WeTransfer, an Banken sowie an unsere Steuerberatung. Mit Portraitbox besteht ein Auftragsverarbeitungsvertrag nach Art. 28 DSGVO. Diese Formularseite wird über GitHub (GitHub Inc., USA; zertifiziert nach dem EU-US Data Privacy Framework) bereitgestellt. Ihre Angaben und Ihre Unterschrift werden dabei nicht online gespeichert: Die PDF entsteht nur auf dem Gerät im Studio und wird per E-Mail an uns geschickt. Eine Kopie erhalten Sie auf Wunsch."] },
+  { h: "4. Wer die Daten erhält", p: ["Daten geben wir nur weiter, soweit das für den Auftrag oder gesetzlich nötig ist: an Portraitbox (Portraitbox GmbH) für die passwortgeschützte Online-Galerie und Bestellungen, an Fotolabore bei bestellten Abzügen oder Produkten, bei Kartenzahlung an Zettle by PayPal, beim Versand großer Bilddateien an WeTransfer, an Banken sowie an unsere Steuerberatung. Mit Portraitbox besteht ein Auftragsverarbeitungsvertrag nach Art. 28 DSGVO. Diese Formularseite wird über GitHub (GitHub Inc., USA; zertifiziert nach dem EU-US Data Privacy Framework) bereitgestellt. Ihre Angaben und Ihre Unterschrift werden dabei nicht online gespeichert: Die PDF entsteht nur auf dem verwendeten Gerät (unserem Studio-Gerät oder Ihrem eigenen Smartphone) und wird per E-Mail an uns geschickt, auf Wunsch zusätzlich an Sie."] },
   { h: "5. Wie lange wir Daten speichern", p: ["Diese Einwilligung bewahren wir als Nachweis auf, solange wir Ihre Daten auf ihrer Grundlage verarbeiten, und darüber hinaus nur so lange, wie es zum Nachweis nötig ist. Rechnungsdaten bewahren wir so lange auf, wie es Handels- und Steuerrecht vorschreiben (bis zu 10 Jahre). Bilddaten archivieren wir für Nachbestellungen bis zu 3 Jahre und löschen sie danach, sofern nichts anderes vereinbart ist."] },
   { h: "6. Ihre Rechte", p: [`Sie haben das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18) und Datenübertragbarkeit (Art. 20 DSGVO) sowie das Recht, eine Einwilligung jederzeit für die Zukunft zu widerrufen (Art. 7 Abs. 3 DSGVO). Eine E-Mail an ${S.mail} genügt. Außerdem können Sie sich bei einer Datenschutz-Aufsichtsbehörde beschweren (Art. 77 DSGVO), z. B. beim Landesbeauftragten für Datenschutz und Informationsfreiheit Mecklenburg-Vorpommern, Werderstraße 74a, 19055 Schwerin.`] },
   { h: "7. Widerspruch gegen Werbung", p: ["Der Kontaktaufnahme zu Werbezwecken können Sie jederzeit ohne Angabe von Gründen widersprechen. Eine automatisierte Entscheidungsfindung oder Profiling findet nicht statt."] }
@@ -243,7 +244,11 @@ function makePad(id) {
 
 /* ---------- Start ---------- */
 let PDF = null, FILE = null, RCPT = "";
+/* QR-Variante: Link mit ?qr – Kunde nutzt sein eigenes Handy und hat die Kopie im Ordner „Gesendet“ */
+const QR = new URLSearchParams(location.search).has("qr");
 function init() {
+  if (QR) { $("copy_row").hidden = true; $("next_card").hidden = true; $("d_qrnote").hidden = false;
+    $("lead_copy").textContent = "Eine Kopie finden Sie danach in Ihrem Mail-Ordner „Gesendet“."; }
   $("contact").innerHTML = `${esc(S.name)} · ${esc(S.strasse)} · ${esc(S.ort)}<br>${esc(S.tel)} · ${esc(S.mail)}`;
   $("t_consent").innerHTML = CONSENT().map(t => `<p>${esc(t)}</p>`).join("");
   $("t_ref").innerHTML = REFERENZ().map(t => `<p>${esc(t)}</p>`).join("");
@@ -272,6 +277,7 @@ function validate(d) {
   if (!d.vor || !d.nach) e.push("Bitte Vor- und Nachnamen eintragen.");
   if (!d.str || !d.plz || !d.ort) e.push("Bitte die vollständige Anschrift eintragen.");
   if (!d.mail && !d.tel) e.push("Bitte E-Mail-Adresse oder Telefonnummer angeben.");
+  if (!QR && $("c_copy").checked && !d.mail) e.push("Für „Kopie an mich senden“ bitte Ihre E-Mail-Adresse eintragen.");
   if (d.mail && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.mail)) e.push("Bitte die E-Mail-Adresse prüfen.");
   if (!$("c_read").checked) e.push("Bitte das Häkchen bei Punkt 2 setzen (Angaben richtig, Datenschutzhinweise gelesen).");
   if (pads.A.empty) e.push("Bitte im Feld unter Punkt 2 unterschreiben.");
@@ -292,7 +298,8 @@ async function sign() {
     PDF = await buildPDF(d, s);
     const safe = x => x.replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/Ä/g,"Ae").replace(/Ö/g,"Oe").replace(/Ü/g,"Ue").replace(/ß/g,"ss").normalize("NFKD").replace(/[^\w-]+/g, "_").replace(/_+/g, "_").replace(/^_|_$/g, "");
     FILE = new File([PDF.output("blob")], `Einwilligung_${safe(d.nach)}_${safe(d.vor)}_${d.datum}.pdf`, { type: "application/pdf" });
-    RCPT = S.mail;
+    RCPT = (!QR && $("c_copy").checked && d.mail) ? `${S.mail}, ${d.mail}` : S.mail;
+    $("d_rcpt_lbl").textContent = RCPT.includes(",") ? "Die Adressen sind schon kopiert:" : "Die Adresse ist schon kopiert:";
     $("d_rcpt").textContent = RCPT;
     const canShare = !!(navigator.canShare && navigator.canShare({ files: [FILE] }));
     $("b_share").hidden = !canShare; $("d_noshare").hidden = canShare;
@@ -317,7 +324,7 @@ function share() {
 }
 function reset() {
   ["f_vor", "f_nach", "f_str", "f_plz", "f_ort", "f_mail", "f_tel", "f_kids"].forEach(id => $(id).value = "");
-  $("f_datum").value = today(); $("c_read").checked = false; $("kids_note").hidden = true;
+  $("f_datum").value = today(); $("c_read").checked = false; $("c_copy").checked = false; $("kids_note").hidden = true;
   document.querySelectorAll('input[name="ref"]').forEach(r => r.checked = false); $("sigBwrap").hidden = true;
   pads.A.clear(); pads.B.clear(); PDF = null; FILE = null; RCPT = "";
   if (navigator.clipboard) navigator.clipboard.writeText("").catch(() => {});
