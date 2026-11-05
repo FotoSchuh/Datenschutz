@@ -76,12 +76,6 @@ details p,details li{font-size:14px}
 .steps li::before{content:counter(s);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;
   background:var(--accent);color:var(--accent-ink);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
 .code{font-family:ui-monospace,Menlo,monospace;font-size:14px;background:var(--field);border:1px solid var(--line);border-radius:6px;padding:2px 6px;word-break:break-all}
-.person{border-top:2px solid var(--line);padding-top:16px;margin-top:16px}
-.person:first-child{border-top:0;margin-top:0;padding-top:0}
-.person-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
-.person-head h3{margin:0;font-size:17px}
-.person-head button{min-height:36px;padding:4px 12px;font-size:14px}
-.pstate{font-weight:700}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -136,7 +130,6 @@ details p,details li{font-size:14px}
     <section class="card legal">
       <h2>3. Veröffentlichung als Referenz <span style="font-weight:400;color:var(--muted);font-size:15px">(freiwillig)</span></h2>
       <div id="t_ref"></div>
-      <p class="note">Werden mehrere Personen fotografiert, gilt diese Entscheidung gemeinsam für alle Personen in diesem Formular.</p>
       <div class="radio-row" role="radiogroup" aria-label="Veröffentlichung als Referenz">
         <label class="opt"><input type="radio" name="ref" value="ja"> Ja, ich stimme zu</label>
         <label class="opt"><input type="radio" name="ref" value="nein"> Nein, bitte nicht veröffentlichen</label>
@@ -145,13 +138,6 @@ details p,details li{font-size:14px}
         <div class="sig-label"><span>Zweite Unterschrift (Referenz) *</span><button type="button" class="ghost" data-clear="B">Löschen</button></div>
         <canvas class="sigbox" id="padB" aria-label="Unterschriftfeld Referenz"></canvas>
       </div>
-    </section>
-
-    <section class="card legal">
-      <h2>4. Weitere Personen <span style="font-weight:400;color:var(--muted);font-size:15px">(z. B. Partner/in, erwachsene Familienmitglieder)</span></h2>
-      <p class="note">Jede weitere erwachsene Person auf den Fotos trägt sich hier ein und unterschreibt selbst. Kinder unter 18 bitte oben bei „Mitfotografierte Kinder“ eintragen.</p>
-      <div id="extras"></div>
-      <div class="actions"><button type="button" class="ghost" id="b_add">+ Weitere Person hinzufügen</button></div>
     </section>
 
     <div class="msg err" id="err" hidden></div>
@@ -211,7 +197,7 @@ const REFERENZ = () => [
 const HINWEISE = () => [
   { h: "Datenschutzhinweise (Art. 13 DSGVO)", p: [] },
   { h: "1. Verantwortlicher", p: [`${S.name}, Inhaber ${S.inhaber}, ${S.strasse}, ${S.ort} · Telefon ${S.tel} · E-Mail ${S.mail} · ${S.web}`] },
-  { h: "2. Welche Daten wir verarbeiten", p: ["Name, Anschrift, E-Mail-Adresse und Telefonnummer, ggf. Namen mitfotografierter Kinder, Name, ggf. E-Mail-Adresse und Unterschrift weiterer fotografierter Personen, Ihre Unterschrift sowie die Fotos, die wir von Ihnen aufnehmen."] },
+  { h: "2. Welche Daten wir verarbeiten", p: ["Name, Anschrift, E-Mail-Adresse und Telefonnummer, ggf. Namen mitfotografierter Kinder, Ihre Unterschrift sowie die Fotos, die wir von Ihnen aufnehmen."] },
   { h: "3. Zwecke und Rechtsgrundlagen", p: [
     "• Erstellung, Bearbeitung und Bereitstellung der Fotos (Online-Galerie oder E-Mail), Abrechnung (Art. 6 Abs. 1 lit. b DSGVO).",
     "• Kontaktaufnahme über den Auftrag hinaus, Benachrichtigungen und Erinnerungen – auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).",
@@ -257,35 +243,6 @@ function makePad(id) {
   return pad;
 }
 
-/* ---------- Weitere Personen ---------- */
-let extras = [], extraSeq = 0;
-const refWord = () => ({ ja: "Ja", nein: "Nein" }[refVal()] || "noch nicht gewählt");
-const bookerName = () => [val("f_vor"), val("f_nach")].filter(Boolean).join(" ");
-const extraText = (w, bn) => `Ich willige wie unter Punkt 2 beschrieben ein, stimme der gemeinsamen Entscheidung zur Veröffentlichung als Referenz (Punkt 3: ${w}) zu und bin einverstanden, dass dieses Dokument mit meinen Angaben als Kopie an die buchende Person${bn ? " (" + bn + ")" : ""} geht.`;
-function updateExtraTexts() { extras.forEach(x => x.el.querySelector("[data-txt]").textContent = extraText(refWord(), bookerName())); }
-function addPerson() {
-  const id = ++extraSeq, el = document.createElement("div");
-  el.className = "person";
-  el.innerHTML = `
-    <div class="person-head"><h3></h3><button type="button" class="ghost" data-rm>Entfernen</button></div>
-    <div class="grid">
-      <div><label for="x${id}_vor">Vorname *</label><input id="x${id}_vor" autocomplete="off" autocapitalize="words"></div>
-      <div><label for="x${id}_nach">Nachname *</label><input id="x${id}_nach" autocomplete="off" autocapitalize="words"></div>
-      <div class="full"><label for="x${id}_mail">E-Mail-Adresse <span style="font-weight:400">(freiwillig)</span></label>
-        <input id="x${id}_mail" type="email" inputmode="email" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
-    </div>
-    <p class="note" data-txt style="margin-top:12px"></p>
-    <div class="sig-label"><span>Unterschrift *</span><button type="button" class="ghost" data-c>Löschen</button></div>
-    <canvas class="sigbox" id="x${id}_pad" aria-label="Unterschriftfeld weitere Person"></canvas>`;
-  $("extras").appendChild(el);
-  const x = { id, el, pad: makePad(`x${id}_pad`), v: k => $(`x${id}_${k}`).value.trim() };
-  el.querySelector("[data-c]").addEventListener("click", () => x.pad.clear());
-  el.querySelector("[data-rm]").addEventListener("click", () => { el.remove(); extras = extras.filter(e => e !== x); numberPersons(); });
-  extras.push(x); numberPersons(); updateExtraTexts();
-  $(`x${id}_vor`).focus();
-}
-function numberPersons() { extras.forEach((x, i) => x.el.querySelector("h3").textContent = `Person ${i + 2}`); }
-
 /* ---------- Start ---------- */
 let PDF = null, FILE = null, RCPT = "";
 /* QR-Variante: Link mit ?qr – Kunde nutzt sein eigenes Handy und hat die Kopie im Ordner „Gesendet“ */
@@ -303,10 +260,7 @@ function init() {
   document.querySelectorAll('input[name="ref"]').forEach(r => r.addEventListener("change", () => {
     $("sigBwrap").hidden = refVal() !== "ja"; if (!$("sigBwrap").hidden) pads.B.size(); }));
   $("f_kids").addEventListener("input", () => $("kids_note").hidden = !val("f_kids"));
-  let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { pads.A.size(); pads.B.size(); extras.forEach(x => x.pad.size()); }, 150); });
-  $("b_add").addEventListener("click", addPerson);
-  document.querySelectorAll('input[name="ref"]').forEach(r => r.addEventListener("change", updateExtraTexts));
-  ["f_vor", "f_nach"].forEach(id => $(id).addEventListener("input", updateExtraTexts));
+  let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { pads.A.size(); pads.B.size(); }, 150); });
   $("b_sign").addEventListener("click", sign);
   $("b_share").addEventListener("click", share);
   $("b_copy").addEventListener("click", () => copyRcpt(true));
@@ -317,8 +271,7 @@ const refVal = () => (document.querySelector('input[name="ref"]:checked') || {})
 
 function collect() {
   return { datum: $("f_datum").value || today(), vor: val("f_vor"), nach: val("f_nach"), str: val("f_str"),
-    plz: val("f_plz"), ort: val("f_ort"), mail: val("f_mail"), tel: val("f_tel"), kids: val("f_kids"), ref: refVal(),
-    extras: extras.map(x => ({ x, vor: x.v("vor"), nach: x.v("nach"), mail: x.v("mail") })) };
+    plz: val("f_plz"), ort: val("f_ort"), mail: val("f_mail"), tel: val("f_tel"), kids: val("f_kids"), ref: refVal() };
 }
 function validate(d) {
   const e = [];
@@ -331,12 +284,6 @@ function validate(d) {
   if (pads.A.empty) e.push("Bitte im Feld unter Punkt 2 unterschreiben.");
   if (!d.ref) e.push("Bitte bei Punkt 3 „Ja“ oder „Nein“ auswählen.");
   if (d.ref === "ja" && pads.B.empty) e.push("Bitte die zweite Unterschrift für die Referenz-Veröffentlichung leisten.");
-  d.extras.forEach((p, i) => {
-    const who = `Person ${i + 2}` + (p.vor || p.nach ? ` (${[p.vor, p.nach].filter(Boolean).join(" ")})` : "");
-    if (!p.vor || !p.nach) e.push(`${who}: bitte Vor- und Nachnamen eintragen.`);
-    if (p.mail && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(p.mail)) e.push(`${who}: bitte die E-Mail-Adresse prüfen.`);
-    if (p.x.pad.empty) e.push(`${who}: Unterschrift fehlt.`);
-  });
   return e;
 }
 
@@ -349,7 +296,6 @@ async function sign() {
     const s = { sigA: small(pads.A.cv, 700), sigB: d.ref === "ja" ? small(pads.B.cv, 700) : null,
       ratioA: pads.A.cv.height / pads.A.cv.width, ratioB: pads.B.cv.height / (pads.B.cv.width || 1),
       ts: new Date().toLocaleString("de-DE", { dateStyle: "medium", timeStyle: "short" }) };
-    d.extras.forEach(p => { p.sig = small(p.x.pad.cv, 700); p.ratio = p.x.pad.cv.height / p.x.pad.cv.width; });
     PDF = await buildPDF(d, s);
     const safe = x => x.replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/Ä/g,"Ae").replace(/Ö/g,"Oe").replace(/Ü/g,"Ue").replace(/ß/g,"ss").normalize("NFKD").replace(/[^\w-]+/g, "_").replace(/_+/g, "_").replace(/^_|_$/g, "");
     FILE = new File([PDF.output("blob")], `Einwilligung_${safe(d.nach)}_${safe(d.vor)}_${d.datum}.pdf`, { type: "application/pdf" });
@@ -373,7 +319,7 @@ function copyRcpt(feedback) {
 }
 function share() {
   copyRcpt(false);                 // Empfänger in die Zwischenablage, dann direkt teilen
-  const name = [val("f_vor") + " " + val("f_nach"), ...extras.map(x => x.v("vor") + " " + x.v("nach"))].join(", ");
+  const name = val("f_vor") + " " + val("f_nach");
   navigator.share({ files: [FILE], title: "Einwilligung Fotoaufnahmen – " + name,
     text: `Einwilligung zur Erstellung von Fotoaufnahmen – ${name}, ${dDE($("f_datum").value)}\n\nBitte an folgende E-Mail-Adresse${RCPT.includes(",") ? "n" : ""} senden:\n${RCPT.split(", ").join("\n")}` }).catch(() => {});
 }
@@ -381,7 +327,6 @@ function reset() {
   ["f_vor", "f_nach", "f_str", "f_plz", "f_ort", "f_mail", "f_tel", "f_kids"].forEach(id => $(id).value = "");
   $("f_datum").value = today(); $("c_read").checked = false; $("c_copy").checked = false; $("kids_note").hidden = true;
   document.querySelectorAll('input[name="ref"]').forEach(r => r.checked = false); $("sigBwrap").hidden = true;
-  extras.forEach(x => x.el.remove()); extras = [];
   pads.A.clear(); pads.B.clear(); PDF = null; FILE = null; RCPT = "";
   if (navigator.clipboard) navigator.clipboard.writeText("").catch(() => {});
   $("done").hidden = true; $("form").hidden = false; window.scrollTo(0, 0);
@@ -457,18 +402,6 @@ async function buildPDF(d, s) {
   } else {
     para(`${d.vor} ${d.nach}: NICHT ERTEILT – keine Veröffentlichung als Referenz.`, 10, "bold", [179, 38, 30]);
   }
-  if (d.extras.length) para("Diese Entscheidung gilt gemeinsam für alle Personen in diesem Formular.", 8.5, "italic", MUTED);
-
-  // Weitere Personen
-  d.extras.forEach((p, i) => {
-    const nm = `${p.vor} ${p.nach}`;
-    need(62);
-    head(`Weitere Person: ${nm}`);
-    if (p.mail) { font(9.5, "bold", MUTED); doc.text("E-Mail", M, y + 3.5); font(10); doc.text(p.mail, M + 42, y + 3.5); y += 7; }
-    para(extraText(d.ref === "ja" ? "Ja" : "Nein", `${d.vor} ${d.nach}`));
-    y += 1;
-    sig(p.sig, p.ratio, `${nm} · Schwerin, ${s.ts} Uhr`);
-  });
 
   // Datenschutzhinweise als Anhang
   doc.addPage(); y = M;
@@ -481,7 +414,7 @@ async function buildPDF(d, s) {
   // Fußzeile
   const n = doc.getNumberOfPages();
   for (let i = 1; i <= n; i++) { doc.setPage(i); font(7.5, "normal", MUTED);
-    doc.text(`${S.name} · Einwilligung ${d.vor} ${d.nach}${d.extras.length ? " u. a." : ""} · ${dDE(d.datum)}`, M, 290);
+    doc.text(`${S.name} · Einwilligung ${d.vor} ${d.nach} · ${dDE(d.datum)}`, M, 290);
     doc.text(`Seite ${i} von ${n}`, 210 - M, 290, { align: "right" }); }
   return doc;
 }
