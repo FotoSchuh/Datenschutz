@@ -1,0 +1,27 @@
+Datenschutz-Einwilligung – Foto Schuh
+
+Dateien (alle gehören zusammen in denselben Ordner bzw. dasselbe GitHub-Projekt):
+  index.html          das Formular
+  logo.png            euer Logo (für Seite und PDF)
+  jspdf.umd.min.js    erstellt die PDF direkt auf dem Gerät
+  jspdf-LICENSE.txt   Lizenz der PDF-Bibliothek
+
+Einrichten auf GitHub (einmalig):
+  1. Auf github.com mit dem Konto FotoSchuh anmelden.
+  2. Oben rechts "+" > "New repository", Name: Datenschutz, auf "Public" lassen, "Create repository".
+  3. "uploading an existing file" anklicken, alle vier Dateien hineinziehen, "Commit changes".
+  4. Settings > Pages > Branch: main, Ordner: / (root) > Save.
+  5. Nach 1–2 Minuten läuft das Formular unter: https://fotoschuh.github.io/Datenschutz/
+  6. Auf dem Studio-Tablet/Handy öffnen und "Zum Home-Bildschirm" hinzufügen.
+
+Benutzung im Studio:
+  Kunde füllt aus und unterschreibt > "PDF per Mail senden" > Mail wählen >
+  im Feld "An" einsetzen (Kunde + info@ sind schon kopiert) > Senden >
+  danach "Neues Formular" tippen, damit alles vom Gerät gelöscht wird.
+  Wichtig: In der Mail-App des Geräts muss info@foto-schuh.de als Absender eingerichtet sein.
+
+Texte oder Studiodaten ändern:
+  index.html öffnen, ganz oben im Skript stehen "EINSTELLUNGEN" und die Texte.
+
+Datenschutz: Es wird nichts online gespeichert. Die PDF entsteht nur auf dem Gerät
+und geht per Mail an euch und den Kunden.

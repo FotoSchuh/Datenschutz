@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Einwilligung · Foto Schuh</title>
+<style>
+:root{
+  --bg:#f6f5f3; --paper:#ffffff; --ink:#1f1c1a; --muted:#6d655e; --line:#e3ddd6;
+  --accent:#e87500; --accent-ink:#ffffff; --accent-soft:#fdf0e4; --ok:#2f7d4f; --warn:#b3261e;
+  --field:#fffaf4;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --radius:10px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#171513; --paper:#211e1b; --ink:#f1ece6; --muted:#a59c93; --line:#3a3530;
+    --accent:#ff8a1f; --accent-ink:#1a1009; --accent-soft:#3a2614; --ok:#6cc08f; --warn:#ff8a80; --field:#2a2621; color-scheme: dark; }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 var(--font);
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{max-width:820px;margin:0 auto;padding-block:20px 60px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+header.top img{height:56px;width:auto}
+header.top .contact{font-size:13px;color:var(--muted);text-align:right}
+@media (prefers-color-scheme: dark){ header.top img{background:#fff;border-radius:8px;padding:6px} }
+h1{font-size:clamp(24px,5vw,32px);line-height:1.15;margin:0 0 6px;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:19px;margin:0 0 12px;color:var(--accent);text-wrap:balance}
+h3{font-size:15px;margin:16px 0 6px}
+p{margin:0 0 10px}
+.lead{color:var(--muted);margin-bottom:18px;max-width:62ch}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 16px}
+.grid > *{min-width:0}
+.full{grid-column:1/-1}
+label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:4px;letter-spacing:.01em}
+input,textarea{width:100%;font:inherit;color:var(--ink);background:var(--field);border:1px solid var(--line);
+  border-radius:8px;padding:10px 12px;min-height:48px}
+textarea{min-height:70px;resize:vertical}
+input:focus,textarea:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.check{display:flex;gap:12px;align-items:flex-start;font-size:16px;margin:12px 0;color:var(--ink);font-weight:500;cursor:pointer}
+.check input{width:24px;height:24px;min-height:0;margin-top:1px;flex:none;accent-color:var(--accent)}
+.radio-row{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.radio-row label.opt{flex:1 1 240px;display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:8px;
+  padding:14px;font-size:16px;font-weight:600;color:var(--ink);cursor:pointer;background:var(--field);margin:0}
+.radio-row label.opt:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.radio-row input{width:22px;height:22px;min-height:0;accent-color:var(--accent);flex:none}
+button,.btn{font:inherit;font-weight:600;border:0;border-radius:8px;padding:12px 20px;min-height:50px;cursor:pointer;
+  background:var(--accent);color:var(--accent-ink);display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+button[disabled]{opacity:.45;cursor:not-allowed}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.legal p,.legal li{font-size:15px}
+.legal ul{padding-left:20px;margin:0 0 10px}
+details{border-top:1px solid var(--line);padding:12px 0 0;margin-top:8px}
+details summary{cursor:pointer;font-weight:700;color:var(--accent);min-height:32px}
+details h3{font-size:14px}
+details p,details li{font-size:14px}
+.warnbox{background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;font-weight:600;margin-bottom:16px}
+.sigbox{border:1px dashed var(--muted);border-radius:8px;background:#fff;touch-action:none;width:100%;height:190px;display:block}
+.sig-label{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:14px 0 6px;font-size:14px;font-weight:600}
+.sig-label button{min-height:34px;padding:4px 12px;font-size:13px}
+.note{font-size:13px;color:var(--muted)}
+.badge{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--accent-soft);
+  color:var(--accent);border-radius:999px;padding:3px 10px;margin-bottom:10px}
+.msg{border-radius:8px;padding:12px 14px;margin:12px 0;font-size:15px}
+.msg.err{background:#fdecea;color:#8a1c14}
+.msg.ok{background:#e8f4ec;color:#1d5434}
+@media (prefers-color-scheme: dark){ .msg.err{background:#3b1b18;color:#ffb4ab} .msg.ok{background:#16301f;color:#a6dcb9} }
+.steps{counter-reset:s;padding-left:0;list-style:none;margin:10px 0}
+.steps li{counter-increment:s;position:relative;padding-left:34px;margin:8px 0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;
+  background:var(--accent);color:var(--accent-ink);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.code{font-family:ui-monospace,Menlo,monospace;font-size:14px;background:var(--field);border:1px solid var(--line);border-radius:6px;padding:2px 6px;word-break:break-all}
+[hidden]{display:none !important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <img src="logo.png" alt="Foto Schuh">
+    <div class="contact" id="contact"></div>
+  </header>
+
+  <!-- ===================== FORMULAR ===================== -->
+  <main id="form">
+    <span class="badge">Einwilligung</span>
+    <h1>Einwilligung zur Erstellung von Portraitaufnahmen</h1>
+    <p class="lead">Bitte füllen Sie das Formular aus und unterschreiben Sie mit dem Finger. Eine Kopie erhalten Sie anschließend per E-Mail.</p>
+    <div class="warnbox">Ohne Einwilligung können keine Fotos gemacht werden.</div>
+
+    <section class="card">
+      <h2>1. Ihre Angaben</h2>
+      <div class="grid">
+        <div><label for="f_datum">Datum</label><input id="f_datum" type="date"></div>
+        <div></div>
+        <div><label for="f_vor">Vorname *</label><input id="f_vor" autocomplete="off" autocapitalize="words"></div>
+        <div><label for="f_nach">Nachname *</label><input id="f_nach" autocomplete="off" autocapitalize="words"></div>
+        <div class="full"><label for="f_str">Straße und Hausnummer *</label><input id="f_str" autocomplete="off"></div>
+        <div><label for="f_plz">PLZ *</label><input id="f_plz" inputmode="numeric" maxlength="5" autocomplete="off"></div>
+        <div><label for="f_ort">Ort *</label><input id="f_ort" autocomplete="off" autocapitalize="words"></div>
+        <div><label for="f_mail">E-Mail-Adresse * <span style="font-weight:400">(für Ihre Kopie)</span></label><input id="f_mail" type="email" inputmode="email" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+        <div><label for="f_tel">Telefonnummer</label><input id="f_tel" type="tel" inputmode="tel" autocomplete="off"></div>
+        <div class="full"><label for="f_kids">Weitere fotografierte Personen, z. B. Kinder <span style="font-weight:400">(freiwillig)</span></label>
+          <input id="f_kids" autocomplete="off" placeholder="Vor- und Nachname"></div>
+      </div>
+      <p class="note" id="kids_note" hidden>Ich unterschreibe auch als Erziehungsberechtigte/r bzw. mit Einverständnis der hier genannten Personen.</p>
+    </section>
+
+    <section class="card legal">
+      <h2>2. Einwilligung in die Datenverarbeitung</h2>
+      <div id="t_consent"></div>
+      <details>
+        <summary>Datenschutzhinweise lesen</summary>
+        <div id="t_hinweise"></div>
+      </details>
+      <label class="check"><input type="checkbox" id="c_read"><span>Ich habe die Datenschutzhinweise gelesen und willige wie oben beschrieben ein.</span></label>
+      <div class="sig-label"><span>Unterschrift *</span><button type="button" class="ghost" data-clear="A">Löschen</button></div>
+      <canvas class="sigbox" id="padA" aria-label="Unterschriftfeld Einwilligung"></canvas>
+    </section>
+
+    <section class="card legal">
+      <h2>3. Veröffentlichung als Referenz <span style="font-weight:400;color:var(--muted);font-size:15px">(freiwillig)</span></h2>
+      <div id="t_ref"></div>
+      <div class="radio-row" role="radiogroup" aria-label="Veröffentlichung als Referenz">
+        <label class="opt"><input type="radio" name="ref" value="ja"> Ja, ich stimme zu</label>
+        <label class="opt"><input type="radio" name="ref" value="nein"> Nein, bitte nicht veröffentlichen</label>
+      </div>
+      <div id="sigBwrap" hidden>
+        <div class="sig-label"><span>Zweite Unterschrift (Referenz) *</span><button type="button" class="ghost" data-clear="B">Löschen</button></div>
+        <canvas class="sigbox" id="padB" aria-label="Unterschriftfeld Referenz"></canvas>
+      </div>
+    </section>
+
+    <div class="msg err" id="err" hidden></div>
+    <div class="actions"><button type="button" id="b_sign">Unterschreiben &amp; abschließen</button></div>
+  </main>
+
+  <!-- ===================== FERTIG ===================== -->
+  <main id="done" hidden>
+    <span class="badge">Fertig</span>
+    <h1>Vielen Dank!</h1>
+    <div class="msg ok">Ihre Einwilligung ist unterschrieben. Jetzt nur noch die PDF per E-Mail verschicken.</div>
+    <section class="card">
+      <h2>PDF versenden</h2>
+      <ol class="steps">
+        <li>Auf <strong>„PDF per Mail senden“</strong> tippen und <strong>Mail</strong> auswählen.</li>
+        <li>Ins Feld <strong>„An“</strong> tippen und <strong>Einsetzen</strong> wählen. Die Empfänger sind schon kopiert:<br>
+          <span class="code" id="d_rcpt"></span></li>
+        <li>Auf <strong>Senden</strong> tippen.</li>
+      </ol>
+      <div class="actions">
+        <button type="button" id="b_share">PDF per Mail senden</button>
+        <button type="button" class="ghost" id="b_copy">Empfänger kopieren</button>
+        <button type="button" class="ghost" id="b_save">PDF speichern</button>
+      </div>
+      <p class="note" id="d_noshare" hidden>Dieses Gerät kann die PDF nicht direkt teilen. Bitte „PDF speichern“ und in der Mail-App als Anhang anfügen.</p>
+    </section>
+    <section class="card">
+      <h2>Nächster Kunde</h2>
+      <p class="note">Erst tippen, wenn die Mail verschickt ist. Alle Angaben und die PDF werden dann vom Gerät gelöscht.</p>
+      <div class="actions"><button type="button" class="ghost" id="b_next">Neues Formular</button></div>
+    </section>
+  </main>
+</div>
+
+<script src="jspdf.umd.min.js"></script>
+<script>
+/* ============================================================
+   EINSTELLUNGEN – Studiodaten hier ändern
+   ============================================================ */
+const S = {
+  name: "Foto Schuh", inhaber: "Alexander Kay Schuh",
+  strasse: "Lübecker Straße 53", ort: "19053 Schwerin",
+  tel: "0385 / 593 85 444", mail: "info@foto-schuh.de", web: "www.foto-schuh.de"
+};
+
+/* ---------- Texte ---------- */
+const CONSENT = () => [
+  `Mit meiner Unterschrift willige ich ein, dass ${S.name} die personenbezogenen Daten, die es im Rahmen unserer Geschäftsbeziehung von mir erhält, verarbeiten darf. ${S.name} bietet eine umfassende Beratung und Betreuung rund um das Thema Fotografie an. Um diese Beratung auch über den eigentlichen Auftrag hinaus in allen Fragen zu diesem Thema zu ermöglichen, bin ich damit einverstanden, dass ${S.name} meine personenbezogenen Daten speichert, um sich gegebenenfalls per Telefon, E-Mail oder Post mit mir in Verbindung zu setzen.`,
+  "Die Einwilligung umfasst die Erstellung von Fotos, die Bereitstellung und Archivierung der Fotos in einer geschützten Online-Galerie sowie Online-Benachrichtigungen und Erinnerungen an wichtige Ereignisse in Bezug auf die Fotos meines Auftrags.",
+  `Diese Einwilligung kann ich jederzeit mit Wirkung für die Zukunft widerrufen. Der Widerruf ist zu richten an: ${S.name}, ${S.strasse}, ${S.ort} oder per E-Mail an ${S.mail}.`,
+  "Garantierte Sicherheit: Mit dem Ihnen ausgehändigten Zugangscode sind die Fotos nur für Sie selbst einsehbar und nicht öffentlich zugänglich."
+];
+const REFERENZ = () => [
+  `Mit meiner zweiten Unterschrift stimme ich zu, dass meine Fotos als Referenz veröffentlicht werden dürfen. Die Referenz-Veröffentlichung umfasst die Nutzung der angefertigten Aufnahmen zu Präsentationszwecken im Studio (Printmedien), im Internet unter ${S.web}, in sozialen Medien (z. B. Facebook, Google, Instagram, TikTok, Pinterest) – dort jederzeit weltweit für jedermann abrufbar – sowie in firmenbezogenen Image-Videos.`,
+  "Diese Einwilligung ist freiwillig. Auch ohne sie werden Ihre Fotos selbstverständlich gemacht. Sie können sie jederzeit mit Wirkung für die Zukunft widerrufen."
+];
+const HINWEISE = () => [
+  { h: "Datenschutzhinweise (Art. 13 DSGVO)", p: [] },
+  { h: "1. Verantwortlicher", p: [`${S.name}, Inhaber ${S.inhaber}, ${S.strasse}, ${S.ort} · Telefon ${S.tel} · E-Mail ${S.mail} · ${S.web}`] },
+  { h: "2. Welche Daten wir verarbeiten", p: ["Name, Anschrift, E-Mail-Adresse und Telefonnummer, ggf. Namen weiterer fotografierter Personen, Ihre Unterschrift sowie die Fotos, die wir von Ihnen aufnehmen."] },
+  { h: "3. Zwecke und Rechtsgrundlagen", p: [
+    "• Erstellung, Bearbeitung und Bereitstellung der Fotos, Abrechnung (Art. 6 Abs. 1 lit. b DSGVO).",
+    "• Kontaktaufnahme über den Auftrag hinaus, Benachrichtigungen und Erinnerungen – auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).",
+    "• Veröffentlichung von Bildern als Referenz nur mit Ihrer gesonderten Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).",
+    "• Erfüllung gesetzlicher Pflichten, z. B. Aufbewahrung von Rechnungen (Art. 6 Abs. 1 lit. c DSGVO)."] },
+  { h: "4. Wer die Daten erhält", p: ["Daten geben wir nur weiter, soweit das für den Auftrag oder gesetzlich nötig ist: an Portraitbox (Portraitbox GmbH) für die passwortgeschützte Online-Galerie und Bestellungen, an Fotolabore bei bestellten Abzügen oder Produkten, bei Kartenzahlung an Zettle by PayPal, beim Versand großer Bilddateien an WeTransfer, an Banken sowie an unsere Steuerberatung. Mit Portraitbox besteht ein Auftragsverarbeitungsvertrag nach Art. 28 DSGVO. Diese Formularseite wird über GitHub (GitHub Inc., USA; zertifiziert nach dem EU-US Data Privacy Framework) bereitgestellt. Ihre Angaben und Ihre Unterschrift werden dabei nicht online gespeichert: Die PDF entsteht nur auf dem Gerät im Studio und wird per E-Mail an Sie und an uns geschickt."] },
+  { h: "5. Wie lange wir Daten speichern", p: ["Diese Einwilligung bewahren wir als Nachweis auf, solange wir Ihre Daten auf ihrer Grundlage verarbeiten, und darüber hinaus nur so lange, wie es zum Nachweis nötig ist. Rechnungsdaten bewahren wir so lange auf, wie es Handels- und Steuerrecht vorschreiben (bis zu 10 Jahre). Bilddaten archivieren wir für Nachbestellungen bis zu 3 Jahre und löschen sie danach, sofern nichts anderes vereinbart ist."] },
+  { h: "6. Ihre Rechte", p: [`Sie haben das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18) und Datenübertragbarkeit (Art. 20 DSGVO) sowie das Recht, eine Einwilligung jederzeit für die Zukunft zu widerrufen (Art. 7 Abs. 3 DSGVO). Eine E-Mail an ${S.mail} genügt. Außerdem können Sie sich bei einer Datenschutz-Aufsichtsbehörde beschweren (Art. 77 DSGVO), z. B. beim Landesbeauftragten für Datenschutz und Informationsfreiheit Mecklenburg-Vorpommern, Werderstraße 74a, 19055 Schwerin.`] },
+  { h: "7. Widerspruch gegen Werbung", p: ["Der Kontaktaufnahme zu Werbezwecken können Sie jederzeit ohne Angabe von Gründen widersprechen. Eine automatisierte Entscheidungsfindung oder Profiling findet nicht statt."] }
+];
+
+/* ---------- Hilfsfunktionen ---------- */
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const dDE = iso => { if (!iso) return ""; const [y, m, d] = iso.split("-"); return `${d}.${m}.${y}`; };
+const today = () => { const t = new Date(); return t.getFullYear() + "-" + String(t.getMonth() + 1).padStart(2, "0") + "-" + String(t.getDate()).padStart(2, "0"); };
+const val = id => $(id).value.trim();
+function legalHTML(blocks) {
+  return blocks.map(b => {
+    let out = "", inList = false;
+    b.p.forEach(t => { const li = t.startsWith("• ");
+      if (li && !inList) { out += "<ul>"; inList = true; } if (!li && inList) { out += "</ul>"; inList = false; }
+      out += li ? `<li>${esc(t.slice(2))}</li>` : `<p>${esc(t)}</p>`; });
+    if (inList) out += "</ul>";
+    return `<h3>${esc(b.h)}</h3>${out}`;
+  }).join("");
+}
+
+/* ---------- Unterschriftfelder ---------- */
+const pads = {};
+function makePad(id) {
+  const cv = $(id), ctx = cv.getContext("2d"); let drawing = false, last = null; const pad = { empty: true, cv };
+  function size() { const r = cv.getBoundingClientRect(); if (!r.width) return; const dpr = window.devicePixelRatio || 1;
+    const img = pad.empty ? null : cv.toDataURL(); cv.width = r.width * dpr; cv.height = r.height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.lineWidth = 2.4; ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.strokeStyle = "#111";
+    if (img) { const im = new Image(); im.onload = () => ctx.drawImage(im, 0, 0, r.width, r.height); im.src = img; } }
+  const pos = e => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+  cv.addEventListener("pointerdown", e => { drawing = true; last = pos(e); cv.setPointerCapture(e.pointerId); ctx.beginPath(); ctx.arc(last.x, last.y, 1.1, 0, Math.PI * 2); ctx.fillStyle = "#111"; ctx.fill(); pad.empty = false; });
+  cv.addEventListener("pointermove", e => { if (!drawing) return; const p = pos(e); ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke(); last = p; pad.empty = false; });
+  ["pointerup", "pointercancel", "pointerleave"].forEach(t => cv.addEventListener(t, () => drawing = false));
+  pad.clear = () => { ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, cv.width, cv.height); ctx.restore(); pad.empty = true; };
+  pad.size = size; size();
+  return pad;
+}
+
+/* ---------- Start ---------- */
+let PDF = null, FILE = null, RCPT = "";
+function init() {
+  $("contact").innerHTML = `${esc(S.name)} · ${esc(S.strasse)} · ${esc(S.ort)}<br>${esc(S.tel)} · ${esc(S.mail)}`;
+  $("t_consent").innerHTML = CONSENT().map(t => `<p>${esc(t)}</p>`).join("");
+  $("t_ref").innerHTML = REFERENZ().map(t => `<p>${esc(t)}</p>`).join("");
+  $("t_hinweise").innerHTML = legalHTML(HINWEISE());
+  $("f_datum").value = today();
+  pads.A = makePad("padA"); pads.B = makePad("padB");
+  document.querySelectorAll("[data-clear]").forEach(b => b.addEventListener("click", () => pads[b.dataset.clear].clear()));
+  document.querySelectorAll('input[name="ref"]').forEach(r => r.addEventListener("change", () => {
+    $("sigBwrap").hidden = refVal() !== "ja"; if (!$("sigBwrap").hidden) pads.B.size(); }));
+  $("f_kids").addEventListener("input", () => $("kids_note").hidden = !val("f_kids"));
+  let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { pads.A.size(); pads.B.size(); }, 150); });
+  $("b_sign").addEventListener("click", sign);
+  $("b_share").addEventListener("click", share);
+  $("b_copy").addEventListener("click", () => copyRcpt(true));
+  $("b_save").addEventListener("click", () => PDF && PDF.save(FILE.name));
+  $("b_next").addEventListener("click", reset);
+}
+const refVal = () => (document.querySelector('input[name="ref"]:checked') || {}).value || "";
+
+function collect() {
+  return { datum: $("f_datum").value || today(), vor: val("f_vor"), nach: val("f_nach"), str: val("f_str"),
+    plz: val("f_plz"), ort: val("f_ort"), mail: val("f_mail"), tel: val("f_tel"), kids: val("f_kids"), ref: refVal() };
+}
+function validate(d) {
+  const e = [];
+  if (!d.vor || !d.nach) e.push("Bitte Vor- und Nachnamen eintragen.");
+  if (!d.str || !d.plz || !d.ort) e.push("Bitte die vollständige Anschrift eintragen.");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.mail)) e.push("Bitte eine gültige E-Mail-Adresse eintragen – dorthin geht Ihre Kopie.");
+  if (!$("c_read").checked) e.push("Bitte bestätigen, dass Sie die Datenschutzhinweise gelesen haben.");
+  if (pads.A.empty) e.push("Bitte im Feld unter Punkt 2 unterschreiben.");
+  if (!d.ref) e.push("Bitte bei Punkt 3 „Ja“ oder „Nein“ auswählen.");
+  if (d.ref === "ja" && pads.B.empty) e.push("Bitte die zweite Unterschrift für die Referenz-Veröffentlichung leisten.");
+  return e;
+}
+
+async function sign() {
+  const d = collect(), errs = validate(d);
+  if (errs.length) { $("err").innerHTML = errs.map(esc).join("<br>"); $("err").hidden = false; $("err").scrollIntoView({ behavior: "smooth", block: "center" }); return; }
+  $("err").hidden = true;
+  $("b_sign").disabled = true; $("b_sign").textContent = "PDF wird erstellt …";
+  try {
+    const s = { sigA: pads.A.cv.toDataURL("image/png"), sigB: d.ref === "ja" ? pads.B.cv.toDataURL("image/png") : null,
+      ratioA: pads.A.cv.height / pads.A.cv.width, ratioB: pads.B.cv.height / (pads.B.cv.width || 1),
+      ts: new Date().toLocaleString("de-DE", { dateStyle: "medium", timeStyle: "short" }) };
+    PDF = await buildPDF(d, s);
+    const safe = x => x.replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/Ä/g,"Ae").replace(/Ö/g,"Oe").replace(/Ü/g,"Ue").replace(/ß/g,"ss").normalize("NFKD").replace(/[^\w-]+/g, "_").replace(/_+/g, "_").replace(/^_|_$/g, "");
+    FILE = new File([PDF.output("blob")], `Einwilligung_${safe(d.nach)}_${safe(d.vor)}_${d.datum}.pdf`, { type: "application/pdf" });
+    RCPT = `${d.mail}, ${S.mail}`;
+    $("d_rcpt").textContent = RCPT;
+    const canShare = !!(navigator.canShare && navigator.canShare({ files: [FILE] }));
+    $("b_share").hidden = !canShare; $("d_noshare").hidden = canShare;
+    $("form").hidden = true; $("done").hidden = false; window.scrollTo(0, 0);
+  } catch (e) {
+    $("err").textContent = "Die PDF konnte nicht erstellt werden (" + (e.message || e) + "). Bitte noch einmal versuchen.";
+    $("err").hidden = false;
+  } finally { $("b_sign").disabled = false; $("b_sign").textContent = "Unterschreiben & abschließen"; }
+}
+
+function copyRcpt(feedback) {
+  const p = navigator.clipboard ? navigator.clipboard.writeText(RCPT) : Promise.reject();
+  if (feedback) p.then(() => { $("b_copy").textContent = "Kopiert ✓"; setTimeout(() => $("b_copy").textContent = "Empfänger kopieren", 2000); })
+    .catch(() => { $("b_copy").textContent = "Bitte abtippen"; });
+  return p.catch(() => {});
+}
+function share() {
+  copyRcpt(false);                 // Empfänger in die Zwischenablage, dann direkt teilen
+  const name = val("f_vor") + " " + val("f_nach");
+  navigator.share({ files: [FILE], title: "Einwilligung Portraitaufnahmen – " + name,
+    text: `Einwilligung zur Erstellung von Portraitaufnahmen – ${name}\n\nVielen Dank für Ihren Besuch!\n${S.name} · ${S.tel} · ${S.web}` }).catch(() => {});
+}
+function reset() {
+  ["f_vor", "f_nach", "f_str", "f_plz", "f_ort", "f_mail", "f_tel", "f_kids"].forEach(id => $(id).value = "");
+  $("f_datum").value = today(); $("c_read").checked = false; $("kids_note").hidden = true;
+  document.querySelectorAll('input[name="ref"]').forEach(r => r.checked = false); $("sigBwrap").hidden = true;
+  pads.A.clear(); pads.B.clear(); PDF = null; FILE = null; RCPT = "";
+  if (navigator.clipboard) navigator.clipboard.writeText("").catch(() => {});
+  $("done").hidden = true; $("form").hidden = false; window.scrollTo(0, 0);
+}
+
+/* ---------- PDF ---------- */
+async function logoData() {
+  try { const r = await fetch("logo.png"); const b = await r.blob();
+    return await new Promise(res => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.readAsDataURL(b); }); }
+  catch (e) { return null; }
+}
+async function buildPDF(d, s) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: "mm", format: "a4" });
+  const M = 18, W = 210 - 2 * M, BOTTOM = 282, ORANGE = [232, 117, 0], MUTED = [110, 100, 94];
+  let y = M;
+  const font = (size, style = "normal", color = [30, 28, 26]) => { doc.setFont("helvetica", style); doc.setFontSize(size); doc.setTextColor(...color); };
+  const need = h => { if (y + h > BOTTOM) { doc.addPage(); y = M; } };
+  const lh = size => size * 0.42;
+  const para = (t, size = 9.5, style = "normal", color, indent = 0) => {
+    font(size, style, color); const lines = doc.splitTextToSize(t, W - indent);
+    lines.forEach(l => { need(lh(size)); doc.text(l, M + indent, y + lh(size) * 0.8); y += lh(size); }); y += 1.4;
+  };
+  const head = t => { need(12); y += 2; font(11.5, "bold", ORANGE); doc.text(t, M, y + 4); y += 7.5; };
+  const sig = (img, ratio, caption) => {
+    need(36); const w = 80, h = Math.min(28, w * ratio);
+    doc.addImage(img, "PNG", M, y, h / ratio, h); y += h + 1;
+    doc.setDrawColor(30); doc.line(M, y, M + w, y); font(8.5, "normal", MUTED); doc.text(caption, M, y + 4); y += 9;
+  };
+
+  // Kopf
+  const logo = await logoData();
+  if (logo) doc.addImage(logo, "PNG", M, y, 30, 30 * 246 / 420);
+  font(8.5, "normal", MUTED);
+  [S.name + " · Inh. " + S.inhaber, S.strasse + " · " + S.ort, S.tel + " · " + S.mail, S.web]
+    .forEach((t, i) => doc.text(t, 210 - M, y + 3 + i * 4, { align: "right" }));
+  y += 24;
+  font(16, "bold"); doc.text("Einwilligung zur Erstellung von Portraitaufnahmen", M, y + 5); y += 9;
+  font(10, "normal", MUTED); doc.text("am " + dDE(d.datum), M, y + 3); y += 9;
+
+  // Angaben
+  head("Angaben");
+  const rows = [["Vor- & Nachname", d.vor + " " + d.nach], ["Anschrift", `${d.str}, ${d.plz} ${d.ort}`],
+    ["E-Mail", d.mail], ["Telefon", d.tel || "–"]];
+  if (d.kids) rows.push(["Weitere Personen", d.kids]);
+  rows.forEach(([k, v]) => { font(9.5, "bold", MUTED); doc.text(k, M, y + 3.5);
+    font(10); const ls = doc.splitTextToSize(v, W - 42); doc.text(ls, M + 42, y + 3.5); y += 5.5 * ls.length; });
+  if (d.kids) { y += 1; para("Ich unterschreibe auch als Erziehungsberechtigte/r bzw. mit Einverständnis der genannten Personen.", 8.5, "italic", MUTED); }
+  y += 2;
+
+  // Einwilligung
+  head("Einwilligung in die Datenverarbeitung");
+  para("Ich habe die Datenschutzhinweise (siehe Anhang) gelesen.", 9.5, "bold");
+  CONSENT().forEach(t => para(t));
+  y += 2;
+  sig(s.sigA, s.ratioA, `${d.vor} ${d.nach} · Schwerin, ${s.ts} Uhr`);
+
+  // Referenz (Text und Unterschrift zusammen auf einer Seite halten)
+  need(d.ref === "ja" ? 80 : 20);
+  head("Veröffentlichung als Referenz (freiwillig)");
+  if (d.ref === "ja") {
+    para("ERTEILT", 10, "bold", [47, 125, 79]);
+    REFERENZ().forEach(t => para(t));
+    y += 2;
+    sig(s.sigB, s.ratioB, `${d.vor} ${d.nach} · Schwerin, ${s.ts} Uhr`);
+  } else {
+    para("NICHT ERTEILT – Die Fotos werden nicht als Referenz veröffentlicht.", 10, "bold", [179, 38, 30]);
+  }
+
+  // Datenschutzhinweise als Anhang
+  doc.addPage(); y = M;
+  HINWEISE().forEach((b, i) => {
+    if (i === 0) { font(14, "bold"); doc.text(b.h, M, y + 5); y += 10; return; }
+    need(10); font(10, "bold", ORANGE); doc.text(b.h, M, y + 3.5); y += 5.5;
+    b.p.forEach(t => para(t, 9));
+  });
+
+  // Fußzeile
+  const n = doc.getNumberOfPages();
+  for (let i = 1; i <= n; i++) { doc.setPage(i); font(7.5, "normal", MUTED);
+    doc.text(`${S.name} · Einwilligung ${d.vor} ${d.nach} · ${dDE(d.datum)}`, M, 290);
+    doc.text(`Seite ${i} von ${n}`, 210 - M, 290, { align: "right" }); }
+  return doc;
+}
+
+init();
+</script>
+</body>
+</html>
