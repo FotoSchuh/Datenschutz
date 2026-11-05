@@ -118,7 +118,7 @@ details p,details li{font-size:14px}
         <summary>Datenschutzhinweise lesen</summary>
         <div id="t_hinweise"></div>
       </details>
-      <label class="check"><input type="checkbox" id="c_read"><span>Ich habe die Datenschutzhinweise gelesen und willige wie oben beschrieben ein.</span></label>
+      <label class="check"><input type="checkbox" id="c_read"><span>Ich bestätige, dass meine Angaben richtig und vollständig sind, habe die Datenschutzhinweise gelesen und willige wie oben beschrieben ein.</span></label>
       <div class="sig-label"><span>Unterschrift *</span><button type="button" class="ghost" data-clear="A">Löschen</button></div>
       <canvas class="sigbox" id="padA" aria-label="Unterschriftfeld Einwilligung"></canvas>
     </section>
@@ -270,7 +270,7 @@ function validate(d) {
   if (!d.vor || !d.nach) e.push("Bitte Vor- und Nachnamen eintragen.");
   if (!d.str || !d.plz || !d.ort) e.push("Bitte die vollständige Anschrift eintragen.");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.mail)) e.push("Bitte eine gültige E-Mail-Adresse eintragen – dorthin geht Ihre Kopie.");
-  if (!$("c_read").checked) e.push("Bitte bestätigen, dass Sie die Datenschutzhinweise gelesen haben.");
+  if (!$("c_read").checked) e.push("Bitte das Häkchen bei Punkt 2 setzen (Angaben richtig, Datenschutzhinweise gelesen).");
   if (pads.A.empty) e.push("Bitte im Feld unter Punkt 2 unterschreiben.");
   if (!d.ref) e.push("Bitte bei Punkt 3 „Ja“ oder „Nein“ auswählen.");
   if (d.ref === "ja" && pads.B.empty) e.push("Bitte die zweite Unterschrift für die Referenz-Veröffentlichung leisten.");
@@ -374,7 +374,7 @@ async function buildPDF(d, s) {
 
   // Einwilligung
   head("Einwilligung in die Datenverarbeitung");
-  para("Ich habe die Datenschutzhinweise (siehe Anhang) gelesen.", 9.5, "bold");
+  para("Ich bestätige, dass meine Angaben richtig und vollständig sind, habe die Datenschutzhinweise (siehe Anhang) gelesen und willige wie folgt beschrieben ein.", 9.5, "bold");
   CONSENT().forEach(t => para(t));
   y += 2;
   sig(s.sigA, s.ratioA, `${d.vor} ${d.nach} · Schwerin, ${s.ts} Uhr`);
