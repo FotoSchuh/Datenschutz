@@ -100,7 +100,8 @@ details p,details li{font-size:14px}
     <div class="warnbox">Ohne Einwilligung können keine Fotos gemacht werden.</div>
 
     <section class="card">
-      <h2>1. Ihre Angaben</h2>
+      <h2>1. Ihre Angaben <span style="font-weight:400;color:var(--muted);font-size:15px">(buchende Person)</span></h2>
+      <p class="note">Bitte hier die Person eintragen, die den Fototermin gebucht hat und dafür verantwortlich ist.</p>
       <div class="grid">
         <div><label for="f_datum">Datum</label><input id="f_datum" type="date"></div>
         <div></div>
@@ -259,8 +260,9 @@ function makePad(id) {
 /* ---------- Weitere Personen ---------- */
 let extras = [], extraSeq = 0;
 const refWord = () => ({ ja: "Ja", nein: "Nein" }[refVal()] || "noch nicht gewählt");
-const extraText = w => `Ich willige wie unter Punkt 2 beschrieben ein, stimme der gemeinsamen Entscheidung zur Veröffentlichung als Referenz (Punkt 3: ${w}) zu und bin einverstanden, dass dieses Dokument mit meinen Angaben als Kopie an die buchende Person geht.`;
-function updateExtraTexts() { extras.forEach(x => x.el.querySelector("[data-txt]").textContent = extraText(refWord())); }
+const bookerName = () => [val("f_vor"), val("f_nach")].filter(Boolean).join(" ");
+const extraText = (w, bn) => `Ich willige wie unter Punkt 2 beschrieben ein, stimme der gemeinsamen Entscheidung zur Veröffentlichung als Referenz (Punkt 3: ${w}) zu und bin einverstanden, dass dieses Dokument mit meinen Angaben als Kopie an die buchende Person${bn ? " (" + bn + ")" : ""} geht.`;
+function updateExtraTexts() { extras.forEach(x => x.el.querySelector("[data-txt]").textContent = extraText(refWord(), bookerName())); }
 function addPerson() {
   const id = ++extraSeq, el = document.createElement("div");
   el.className = "person";
@@ -304,6 +306,7 @@ function init() {
   let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { pads.A.size(); pads.B.size(); extras.forEach(x => x.pad.size()); }, 150); });
   $("b_add").addEventListener("click", addPerson);
   document.querySelectorAll('input[name="ref"]').forEach(r => r.addEventListener("change", updateExtraTexts));
+  ["f_vor", "f_nach"].forEach(id => $(id).addEventListener("input", updateExtraTexts));
   $("b_sign").addEventListener("click", sign);
   $("b_share").addEventListener("click", share);
   $("b_copy").addEventListener("click", () => copyRcpt(true));
@@ -426,7 +429,7 @@ async function buildPDF(d, s) {
   font(10, "normal", MUTED); doc.text("am " + dDE(d.datum), M, y + 3); y += 9;
 
   // Angaben
-  head("Angaben");
+  head("Buchende Person (verantwortlich für den Fototermin)");
   const rows = [["Vor- & Nachname", d.vor + " " + d.nach], ["Anschrift", `${d.str}, ${d.plz} ${d.ort}`],
     ["E-Mail", d.mail || "–"], ["Telefon", d.tel || "–"]];
   if (d.kids) rows.push(["Kinder (unter 18)", d.kids]);
@@ -462,7 +465,7 @@ async function buildPDF(d, s) {
     need(62);
     head(`Weitere Person: ${nm}`);
     if (p.mail) { font(9.5, "bold", MUTED); doc.text("E-Mail", M, y + 3.5); font(10); doc.text(p.mail, M + 42, y + 3.5); y += 7; }
-    para(extraText(d.ref === "ja" ? "Ja" : "Nein"));
+    para(extraText(d.ref === "ja" ? "Ja" : "Nein", `${d.vor} ${d.nach}`));
     y += 1;
     sig(p.sig, p.ratio, `${nm} · Schwerin, ${s.ts} Uhr`);
   });
