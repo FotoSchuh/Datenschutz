@@ -320,7 +320,7 @@ function share() {
   copyRcpt(false);                 // Empfänger in die Zwischenablage, dann direkt teilen
   const name = val("f_vor") + " " + val("f_nach");
   navigator.share({ files: [FILE], title: "Einwilligung Fotoaufnahmen – " + name,
-    text: `Einwilligung zur Erstellung von Fotoaufnahmen – ${name}, ${dDE($("f_datum").value)}` }).catch(() => {});
+    text: `Einwilligung zur Erstellung von Fotoaufnahmen – ${name}, ${dDE($("f_datum").value)}\n\nBitte an folgende E-Mail-Adresse${RCPT.includes(",") ? "n" : ""} senden:\n${RCPT.split(", ").join("\n")}` }).catch(() => {});
 }
 function reset() {
   ["f_vor", "f_nach", "f_str", "f_plz", "f_ort", "f_mail", "f_tel", "f_kids"].forEach(id => $(id).value = "");
