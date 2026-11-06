@@ -20,7 +20,7 @@
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 var(--font);
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.55 var(--font);
   padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 .wrap{max-width:820px;margin:0 auto;padding-block:20px 60px;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -29,7 +29,7 @@ header.top img{height:56px;width:auto}
 header.top .contact{font-size:13px;color:var(--muted);text-align:right}
 @media (prefers-color-scheme: dark){ header.top img{background:#fff;border-radius:8px;padding:6px} }
 h1{font-size:clamp(24px,5vw,32px);line-height:1.15;margin:0 0 6px;text-wrap:balance;letter-spacing:-.01em}
-h2{font-size:19px;margin:0 0 12px;color:var(--accent);text-wrap:balance}
+h2{font-size:21px;margin:0 0 12px;color:var(--accent);text-wrap:balance}
 h3{font-size:15px;margin:16px 0 6px}
 p{margin:0 0 10px}
 .lead{color:var(--muted);margin-bottom:18px;max-width:62ch}
@@ -37,34 +37,34 @@ p{margin:0 0 10px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 16px}
 .grid > *{min-width:0}
 .full{grid-column:1/-1}
-label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:4px;letter-spacing:.01em}
+label{display:block;font-size:15px;font-weight:600;color:var(--muted);margin-bottom:4px;letter-spacing:.01em}
 input,textarea{width:100%;font:inherit;color:var(--ink);background:var(--field);border:1px solid var(--line);
-  border-radius:8px;padding:10px 12px;min-height:48px}
+  border-radius:8px;padding:12px 14px;min-height:54px;font-size:18px}
 textarea{min-height:70px;resize:vertical}
 input:focus,textarea:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-.check{display:flex;gap:12px;align-items:flex-start;font-size:16px;margin:12px 0;color:var(--ink);font-weight:500;cursor:pointer}
-.check input{width:24px;height:24px;min-height:0;margin-top:1px;flex:none;accent-color:var(--accent)}
+.check{display:flex;gap:14px;align-items:flex-start;font-size:17px;margin:12px 0;color:var(--ink);font-weight:500;cursor:pointer}
+.check input{width:28px;height:28px;min-height:0;margin-top:1px;flex:none;accent-color:var(--accent)}
 .radio-row{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
 .radio-row label.opt{flex:1 1 240px;display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:8px;
-  padding:14px;font-size:16px;font-weight:600;color:var(--ink);cursor:pointer;background:var(--field);margin:0}
+  padding:16px;font-size:17px;font-weight:600;color:var(--ink);cursor:pointer;background:var(--field);margin:0}
 .radio-row label.opt:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
-.radio-row input{width:22px;height:22px;min-height:0;accent-color:var(--accent);flex:none}
-button,.btn{font:inherit;font-weight:600;border:0;border-radius:8px;padding:12px 20px;min-height:50px;cursor:pointer;
+.radio-row input{width:26px;height:26px;min-height:0;accent-color:var(--accent);flex:none}
+button,.btn{font:inherit;font-weight:600;border:0;border-radius:8px;padding:14px 22px;min-height:56px;cursor:pointer;font-size:18px;
   background:var(--accent);color:var(--accent-ink);display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
 button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
 button[disabled]{opacity:.45;cursor:not-allowed}
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.legal p,.legal li{font-size:15px}
+.legal p,.legal li{font-size:16px}
 .legal ul{padding-left:20px;margin:0 0 10px}
 details{border-top:1px solid var(--line);padding:12px 0 0;margin-top:8px}
-details summary{cursor:pointer;font-weight:700;color:var(--accent);min-height:32px}
+details summary{cursor:pointer;font-weight:700;color:var(--accent);min-height:44px;display:flex;align-items:center;font-size:17px}
 details h3{font-size:14px}
 details p,details li{font-size:14px}
 .warnbox{background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;font-weight:600;margin-bottom:16px}
-.sigbox{border:1px dashed var(--muted);border-radius:8px;background:#fff;touch-action:none;width:100%;height:190px;display:block}
-.sig-label{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:14px 0 6px;font-size:14px;font-weight:600}
-.sig-label button{min-height:34px;padding:4px 12px;font-size:13px}
-.note{font-size:13px;color:var(--muted)}
+.sigbox{border:2px dashed var(--muted);border-radius:8px;background:#fff;touch-action:none;width:100%;height:210px;display:block}
+.sig-label{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:16px 0 6px;font-size:17px;font-weight:700}
+.sig-label button{min-height:40px;padding:4px 14px;font-size:15px}
+.note{font-size:15px;color:var(--muted)}
 .badge{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--accent-soft);
   color:var(--accent);border-radius:999px;padding:3px 10px;margin-bottom:10px}
 .msg{border-radius:8px;padding:12px 14px;margin:12px 0;font-size:15px}
@@ -76,6 +76,14 @@ details p,details li{font-size:14px}
 .steps li::before{content:counter(s);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;
   background:var(--accent);color:var(--accent-ink);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
 .code{font-family:ui-monospace,Menlo,monospace;font-size:14px;background:var(--field);border:1px solid var(--line);border-radius:6px;padding:2px 6px;word-break:break-all}
+.summary{background:var(--accent-soft);border-radius:10px;padding:16px 18px;margin:0 0 6px}
+.summary h3{margin:0 0 8px;font-size:18px}
+.summary ul{margin:0;padding-left:22px}
+.summary li{font-size:17px;margin:6px 0}
+.invalid{border-color:var(--warn) !important;box-shadow:0 0 0 3px rgba(179,38,30,.18) !important}
+.sigbox.invalid{border-style:solid}
+.radio-row.invalid,.check.invalid{outline:2px solid var(--warn);outline-offset:4px;border-radius:8px}
+.ferr{color:var(--warn);font-weight:700;font-size:16px;margin:6px 0 0}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -109,39 +117,56 @@ details p,details li{font-size:14px}
         <div><label for="f_tel">Telefonnummer</label><input id="f_tel" type="tel" inputmode="tel" autocomplete="off"></div>
         <p class="note full" style="margin:0">Bitte mindestens E-Mail-Adresse oder Telefonnummer angeben.</p>
         <div class="full"><label for="f_kids">Mitfotografierte Kinder unter 18 <span style="font-weight:400">(nur ausfüllen, wenn Kinder mit fotografiert werden)</span></label>
-          <input id="f_kids" autocomplete="off" placeholder="Vorname (Nachname nur, wenn abweichend)"></div>
+          <input id="f_kids" autocomplete="off" placeholder="Vorname, Nachname nur wenn anders"></div>
       </div>
       
     </section>
 
     <section class="card legal">
-      <h2>2. Einwilligung in die Datenverarbeitung</h2>
-      <div id="t_consent"></div>
+      <h2>2. Dürfen wir Ihre Fotos zeigen? <span style="font-weight:400;color:var(--muted);font-size:16px">(freiwillig)</span></h2>
+      <p>Wir würden gern einzelne Fotos als Beispiel unserer Arbeit zeigen: im Schaufenster, auf unserer Website und in sozialen Medien. Das ist freiwillig – Ihre Fotos werden auch bei „Nein“ ganz normal gemacht.</p>
+      <div class="radio-row" id="ref_row" role="radiogroup" aria-label="Veröffentlichung als Referenz">
+        <label class="opt"><input type="radio" name="ref" value="ja"> Ja, gern</label>
+        <label class="opt"><input type="radio" name="ref" value="nein"> Nein, bitte nicht</label>
+      </div>
+      <details>
+        <summary>Mehr dazu lesen</summary>
+        <div id="t_ref"></div>
+      </details>
+    </section>
+
+    <section class="card legal">
+      <h2>3. Einwilligung &amp; Unterschrift</h2>
+      <div class="summary">
+        <h3>Das Wichtigste in Kürze</h3>
+        <ul>
+          <li><strong>Wer:</strong> <span id="sum_who"></span> speichert Ihre Angaben und Fotos.</li>
+          <li><strong>Wofür:</strong> um Ihre Fotos zu erstellen, zu bearbeiten, Ihnen zu liefern (Online-Galerie oder E-Mail) und abzurechnen – und um Sie rund um das Thema Fotografie zu kontaktieren.</li>
+          <li><strong>Weitergabe</strong> nur, wenn es für den Auftrag nötig ist, z. B. an die Online-Galerie, ein Fotolabor oder die Steuerberatung.</li>
+          <li><strong>Veröffentlichung</strong> Ihrer Fotos nur bei „Ja“ unter Punkt 2 – das ist freiwillig.</li>
+          <li><strong>Widerruf</strong> jederzeit möglich, per Post oder an <span id="sum_mail"></span>.</li>
+        </ul>
+      </div>
+      <details>
+        <summary>Vollständigen Einwilligungstext lesen</summary>
+        <div id="t_consent"></div>
+      </details>
       <details>
         <summary>Datenschutzhinweise lesen</summary>
         <div id="t_hinweise"></div>
       </details>
-      <label class="check"><input type="checkbox" id="c_read"><span>Ich bestätige, dass meine Angaben richtig und vollständig sind, habe die Datenschutzhinweise gelesen und willige wie oben beschrieben ein.</span></label>
-      <p class="note" id="kids_note" hidden>Ich bestätige, dass ich für die genannten Kinder sorgeberechtigt bin und – falls das Sorgerecht gemeinsam mit einer anderen Person besteht – auch in deren Einverständnis handle.</p>
-      <div class="sig-label"><span>Unterschrift *</span><button type="button" class="ghost" data-clear="A">Löschen</button></div>
+      <p class="note" id="kids_note" hidden style="font-size:16px;margin-top:14px">Ich bestätige, dass ich für die genannten Kinder sorgeberechtigt bin und – falls das Sorgerecht gemeinsam mit einer anderen Person besteht – auch in deren Einverständnis handle.</p>
+      <label class="check" id="read_row"><input type="checkbox" id="c_read"><span>Ich bestätige, dass meine Angaben richtig und vollständig sind, habe die Datenschutzhinweise gelesen und willige wie oben beschrieben ein.</span></label>
+      <div class="sig-label"><span>Ihre Unterschrift *</span><button type="button" class="ghost" data-clear="A">Löschen</button></div>
       <canvas class="sigbox" id="padA" aria-label="Unterschriftfeld Einwilligung"></canvas>
-    </section>
-
-    <section class="card legal">
-      <h2>3. Veröffentlichung als Referenz <span style="font-weight:400;color:var(--muted);font-size:15px">(freiwillig)</span></h2>
-      <div id="t_ref"></div>
-      <div class="radio-row" role="radiogroup" aria-label="Veröffentlichung als Referenz">
-        <label class="opt"><input type="radio" name="ref" value="ja"> Ja, ich stimme zu</label>
-        <label class="opt"><input type="radio" name="ref" value="nein"> Nein, bitte nicht veröffentlichen</label>
-      </div>
       <div id="sigBwrap" hidden>
-        <div class="sig-label"><span>Zweite Unterschrift (Referenz) *</span><button type="button" class="ghost" data-clear="B">Löschen</button></div>
+        <div class="sig-label"><span>Zweite Unterschrift – für „Ja“ zur Veröffentlichung *</span><button type="button" class="ghost" data-clear="B">Löschen</button></div>
         <canvas class="sigbox" id="padB" aria-label="Unterschriftfeld Referenz"></canvas>
       </div>
     </section>
 
     <div class="msg err" id="err" hidden></div>
-    <div class="actions"><button type="button" id="b_sign">Unterschreiben &amp; abschließen</button></div>
+    <div class="actions"><button type="button" id="b_sign" style="width:100%">Unterschreiben &amp; abschließen</button></div>
   </main>
 
   <!-- ===================== FERTIG ===================== -->
@@ -251,6 +276,11 @@ function init() {
   if (QR) { $("copy_row").hidden = true; $("next_card").hidden = true; $("d_qrnote").hidden = false;
     $("lead_copy").textContent = "Eine Kopie finden Sie danach in Ihrem Mail-Ordner „Gesendet“."; }
   $("contact").innerHTML = `${esc(S.name)} · ${esc(S.strasse)} · ${esc(S.ort)}<br>${esc(S.tel)} · ${esc(S.mail)}`;
+  $("sum_who").textContent = `${S.name} (Inh. ${S.inhaber}, ${S.strasse}, ${S.ort})`;
+  $("sum_mail").textContent = S.mail;
+  ["f_vor","f_nach","f_str","f_plz","f_ort","f_mail","f_tel","c_read","c_copy"].forEach(id => $(id).addEventListener("input", () => clearErr($(id))));
+  document.querySelectorAll('input[name="ref"]').forEach(r => r.addEventListener("change", () => clearErr($("ref_row"))));
+  ["padA","padB"].forEach(id => $(id).addEventListener("pointerdown", () => clearErr($(id))));
   $("t_consent").innerHTML = CONSENT().map(t => `<p>${esc(t)}</p>`).join("");
   $("t_ref").innerHTML = REFERENZ().map(t => `<p>${esc(t)}</p>`).join("");
   $("t_hinweise").innerHTML = legalHTML(HINWEISE());
@@ -274,23 +304,46 @@ function collect() {
     plz: val("f_plz"), ort: val("f_ort"), mail: val("f_mail"), tel: val("f_tel"), kids: val("f_kids"), ref: refVal() };
 }
 function validate(d) {
-  const e = [];
-  if (!d.vor || !d.nach) e.push("Bitte Vor- und Nachnamen eintragen.");
-  if (!d.str || !d.plz || !d.ort) e.push("Bitte die vollständige Anschrift eintragen.");
-  if (!d.mail && !d.tel) e.push("Bitte E-Mail-Adresse oder Telefonnummer angeben.");
-  if (!QR && $("c_copy").checked && !d.mail) e.push("Für „Kopie an mich senden“ bitte Ihre E-Mail-Adresse eintragen.");
-  if (d.mail && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.mail)) e.push("Bitte die E-Mail-Adresse prüfen.");
-  if (!$("c_read").checked) e.push("Bitte das Häkchen bei Punkt 2 setzen (Angaben richtig, Datenschutzhinweise gelesen).");
-  if (pads.A.empty) e.push("Bitte im Feld unter Punkt 2 unterschreiben.");
-  if (!d.ref) e.push("Bitte bei Punkt 3 „Ja“ oder „Nein“ auswählen.");
-  if (d.ref === "ja" && pads.B.empty) e.push("Bitte die zweite Unterschrift für die Referenz-Veröffentlichung leisten.");
+  const e = [], add = (el, msg) => e.push({ el, msg });
+  if (!d.vor) add($("f_vor"), "Bitte Vornamen eintragen.");
+  if (!d.nach) add($("f_nach"), "Bitte Nachnamen eintragen.");
+  if (!d.str) add($("f_str"), "Bitte Straße und Hausnummer eintragen.");
+  if (!d.plz) add($("f_plz"), "Bitte PLZ eintragen.");
+  if (!d.ort) add($("f_ort"), "Bitte Ort eintragen.");
+  if (d.mail && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.mail)) add($("f_mail"), "Bitte die E-Mail-Adresse prüfen.");
+  else if (!QR && $("c_copy").checked && !d.mail) add($("f_mail"), "Für „Kopie an mich senden“ bitte Ihre E-Mail-Adresse eintragen.");
+  if (!d.mail && !d.tel) add($("f_tel"), "Bitte E-Mail-Adresse oder Telefonnummer angeben.");
+  if (!d.ref) add($("ref_row"), "Bitte „Ja“ oder „Nein“ antippen.");
+  if (!$("c_read").checked) add($("read_row"), "Bitte hier das Häkchen setzen.");
+  if (pads.A.empty) add($("padA"), "Bitte hier mit dem Finger unterschreiben.");
+  if (d.ref === "ja" && pads.B.empty) add($("padB"), "Bitte hier die zweite Unterschrift leisten.");
   return e;
+}
+function clearErr(el) {
+  if (!el) return;
+  if (el.id === "c_read" || el.id === "c_copy") el = el.closest("label");
+  el.classList.remove("invalid");
+  const n = el.nextElementSibling; if (n && n.classList.contains("ferr")) n.remove();
+}
+function showErrs(errs) {
+  document.querySelectorAll(".ferr").forEach(n => n.remove());
+  document.querySelectorAll(".invalid").forEach(n => n.classList.remove("invalid"));
+  errs.forEach(({ el, msg }) => {
+    el.classList.add("invalid");
+    const m = document.createElement("p"); m.className = "ferr"; m.textContent = msg; el.insertAdjacentElement("afterend", m);
+  });
+  $("err").textContent = errs.length === 1 ? "Eine Angabe fehlt noch – bitte die rot markierte Stelle ergänzen."
+    : `Es fehlen noch ${errs.length} Angaben – bitte die rot markierten Stellen ergänzen.`;
+  $("err").hidden = false;
+  const first = errs[0].el;
+  first.scrollIntoView({ behavior: "smooth", block: "center" });
+  if (first.tagName === "INPUT") setTimeout(() => first.focus({ preventScroll: true }), 400);
 }
 
 async function sign() {
   const d = collect(), errs = validate(d);
-  if (errs.length) { $("err").innerHTML = errs.map(esc).join("<br>"); $("err").hidden = false; $("err").scrollIntoView({ behavior: "smooth", block: "center" }); return; }
-  $("err").hidden = true;
+  if (errs.length) { showErrs(errs); return; }
+  $("err").hidden = true; document.querySelectorAll(".ferr").forEach(n => n.remove());
   $("b_sign").disabled = true; $("b_sign").textContent = "PDF wird erstellt …";
   try {
     const s = { sigA: small(pads.A.cv, 700), sigB: d.ref === "ja" ? small(pads.B.cv, 700) : null,
@@ -327,6 +380,8 @@ function reset() {
   ["f_vor", "f_nach", "f_str", "f_plz", "f_ort", "f_mail", "f_tel", "f_kids"].forEach(id => $(id).value = "");
   $("f_datum").value = today(); $("c_read").checked = false; $("c_copy").checked = false; $("kids_note").hidden = true;
   document.querySelectorAll('input[name="ref"]').forEach(r => r.checked = false); $("sigBwrap").hidden = true;
+  document.querySelectorAll(".ferr").forEach(n => n.remove()); document.querySelectorAll(".invalid").forEach(n => n.classList.remove("invalid")); $("err").hidden = true;
+  document.querySelectorAll("details").forEach(x => x.open = false);
   pads.A.clear(); pads.B.clear(); PDF = null; FILE = null; RCPT = "";
   if (navigator.clipboard) navigator.clipboard.writeText("").catch(() => {});
   $("done").hidden = true; $("form").hidden = false; window.scrollTo(0, 0);
