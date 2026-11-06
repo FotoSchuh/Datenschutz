@@ -57,7 +57,12 @@ button[disabled]{opacity:.45;cursor:not-allowed}
 .legal p,.legal li{font-size:16px}
 .legal ul{padding-left:20px;margin:0 0 10px}
 details{border-top:1px solid var(--line);padding:12px 0 0;margin-top:8px}
-details summary{cursor:pointer;font-weight:700;color:var(--accent);min-height:44px;display:flex;align-items:center;font-size:17px}
+details summary{cursor:pointer;font-weight:700;color:var(--accent);min-height:48px;display:flex;align-items:center;gap:10px;font-size:17px;
+  list-style:none}
+details summary span{text-decoration:underline;text-underline-offset:3px}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"▸";font-size:22px;line-height:1;flex:none;display:inline-block;transition:transform .15s}
+details[open] summary::before{transform:rotate(90deg)}
 details h3{font-size:14px}
 details p,details li{font-size:14px}
 .warnbox{background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;font-weight:600;margin-bottom:16px}
@@ -130,7 +135,7 @@ details p,details li{font-size:14px}
         <label class="opt"><input type="radio" name="ref" value="nein"> Nein, bitte nicht</label>
       </div>
       <details>
-        <summary>Mehr dazu lesen</summary>
+        <summary><span>Hier tippen, um mehr zur Veröffentlichung zu lesen</span></summary>
         <div id="t_ref"></div>
       </details>
     </section>
@@ -148,11 +153,11 @@ details p,details li{font-size:14px}
         </ul>
       </div>
       <details>
-        <summary>Vollständigen Einwilligungstext lesen</summary>
+        <summary><span>Hier tippen, um den vollständigen Einwilligungstext zu lesen</span></summary>
         <div id="t_consent"></div>
       </details>
       <details>
-        <summary>Datenschutzhinweise lesen</summary>
+        <summary><span>Hier tippen, um die Datenschutzhinweise zu lesen</span></summary>
         <div id="t_hinweise"></div>
       </details>
       <p class="note" id="kids_note" hidden style="font-size:16px;margin-top:14px">Ich bestätige, dass ich für die genannten Kinder sorgeberechtigt bin und – falls das Sorgerecht gemeinsam mit einer anderen Person besteht – auch in deren Einverständnis handle.</p>
