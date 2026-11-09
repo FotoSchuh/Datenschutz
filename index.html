@@ -80,7 +80,7 @@ details p,details li{font-size:14px}
 .steps li{counter-increment:s;position:relative;padding-left:34px;margin:8px 0}
 .steps li::before{content:counter(s);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;
   background:var(--accent);color:var(--accent-ink);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.code{font-family:ui-monospace,Menlo,monospace;font-size:14px;background:var(--field);border:1px solid var(--line);border-radius:6px;padding:2px 6px;word-break:break-all}
+.code{font-family:ui-monospace,Menlo,monospace;font-size:14px;background:var(--field);border:1px solid var(--line);border-radius:6px;padding:2px 6px;display:inline-block;overflow-wrap:anywhere;line-height:1.6}
 .summary{background:var(--accent-soft);border-radius:10px;padding:16px 18px;margin:0 0 6px}
 .summary h3{margin:0 0 8px;font-size:18px}
 .summary ul{margin:0;padding-left:22px}
@@ -89,6 +89,10 @@ details p,details li{font-size:14px}
 .sigbox.invalid{border-style:solid}
 .radio-row.invalid,.check.invalid{outline:2px solid var(--warn);outline-offset:4px;border-radius:8px}
 .ferr{color:var(--warn);font-weight:700;font-size:16px;margin:6px 0 0}
+.row2{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row2 > *{min-width:0}
+.kids-label{color:var(--accent);font-size:16px;font-weight:700}
+.kids-label span{font-weight:400;color:var(--muted)}
 [hidden]{display:none !important}
 </style>
 </head>
@@ -103,7 +107,7 @@ details p,details li{font-size:14px}
   <main id="form">
     <span class="badge">Einwilligung</span>
     <h1>Einwilligung zur Erstellung von Fotoaufnahmen</h1>
-    <p class="lead">Bitte füllen Sie das Formular aus und unterschreiben Sie mit dem Finger. Am Ende tippen Sie auf „Speichern &amp; an Foto Schuh senden“. <span id="lead_copy">Eine Kopie können Sie sich dabei selbst mitschicken.</span></p>
+    <p class="lead">Bitte füllen Sie das Formular aus und unterschreiben Sie mit dem Finger. Am Ende tippen Sie auf „PDF per Mail an Foto Schuh senden“. <span id="lead_copy">Eine Kopie können Sie sich dabei selbst mitschicken.</span></p>
     <div class="warnbox">Ohne Einwilligung können keine Fotos gemacht werden.</div>
 
     <section class="card">
@@ -112,17 +116,15 @@ details p,details li{font-size:14px}
       <div class="grid">
         <div><label for="f_datum">Datum</label><input id="f_datum" type="date"></div>
         <div></div>
-        <div><label for="f_vor">Vorname *</label><input id="f_vor" autocomplete="off" autocapitalize="words"></div>
-        <div><label for="f_nach">Nachname *</label><input id="f_nach" autocomplete="off" autocapitalize="words"></div>
+        <div class="full"><label for="f_name">Vor- und Nachname *</label><input id="f_name" autocomplete="off" autocapitalize="words"></div>
         <div class="full"><label for="f_str">Straße und Hausnummer *</label><input id="f_str" autocomplete="off"></div>
         <div><label for="f_plz">PLZ *</label><input id="f_plz" inputmode="numeric" maxlength="5" autocomplete="off"></div>
         <div><label for="f_ort">Ort *</label><input id="f_ort" autocomplete="off" autocapitalize="words"></div>
-        <div><label for="f_mail">E-Mail-Adresse</label><input id="f_mail" type="email" inputmode="email" autocomplete="off" autocapitalize="off" spellcheck="false">
-          <label class="check" id="copy_row" style="margin:8px 0 0"><input type="checkbox" id="c_copy"><span>Kopie an mich senden</span></label></div>
+        <div><label for="f_mail">E-Mail-Adresse</label><input id="f_mail" type="email" inputmode="email" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
         <div><label for="f_tel">Telefonnummer</label><input id="f_tel" type="tel" inputmode="tel" autocomplete="off"></div>
         <p class="note full" style="margin:0">Bitte mindestens E-Mail-Adresse oder Telefonnummer angeben.</p>
-        <div class="full"><label for="f_kids">Mitfotografierte Kinder unter 18 <span style="font-weight:400">(nur ausfüllen, wenn Kinder mit fotografiert werden)</span></label>
-          <input id="f_kids" autocomplete="off" placeholder="Vorname, Nachname nur wenn anders"></div>
+        <div class="full"><label for="f_kids" class="kids-label">Mitfotografierte Kinder unter 18 <span>(nur ausfüllen, wenn Kinder mit fotografiert werden – Nachname bitte nur, wenn abweichend von oben)</span></label>
+          <input id="f_kids" autocomplete="off" placeholder="z. B. Lina, Paul"></div>
       </div>
       
     </section>
@@ -162,6 +164,7 @@ details p,details li{font-size:14px}
       </details>
       <p class="note" id="kids_note" hidden style="font-size:16px;margin-top:14px">Ich bestätige, dass ich für die genannten Kinder sorgeberechtigt bin und – falls das Sorgerecht gemeinsam mit einer anderen Person besteht – auch in deren Einverständnis handle.</p>
       <label class="check" id="read_row"><input type="checkbox" id="c_read"><span>Ich bestätige, dass meine Angaben richtig und vollständig sind, habe die Datenschutzhinweise gelesen und willige wie oben beschrieben ein.</span></label>
+      <label class="check" id="copy_row"><input type="checkbox" id="c_copy"><span>Kopie an mich senden <span style="color:var(--muted);font-weight:400">(an die oben angegebene E-Mail-Adresse)</span></span></label>
       <div class="sig-label"><span>Ihre Unterschrift *</span><button type="button" class="ghost" data-clear="A">Löschen</button></div>
       <canvas class="sigbox" id="padA" aria-label="Unterschriftfeld Einwilligung"></canvas>
       <div id="sigBwrap" hidden>
@@ -182,14 +185,13 @@ details p,details li{font-size:14px}
     <section class="card">
       <h2>An Foto Schuh senden</h2>
       <ol class="steps">
-        <li>Auf <strong>„Speichern &amp; an Foto Schuh senden“</strong> tippen und <strong>Mail</strong> auswählen.</li>
+        <li>Auf <strong>„PDF per Mail an Foto Schuh senden“</strong> tippen und <strong>Mail</strong> auswählen.</li>
         <li>Ins Feld <strong>„An“</strong> tippen und <strong>Einsetzen</strong> wählen. <span id="d_rcpt_lbl">Die Adresse ist schon kopiert:</span><br>
           <span class="code" id="d_rcpt"></span></li>
         <li>Auf <strong>Senden</strong> tippen.</li>
       </ol>
       <div class="actions">
-        <button type="button" id="b_share">Speichern &amp; an Foto Schuh senden</button>
-        <button type="button" class="ghost" id="b_copy">Adresse kopieren</button>
+        <button type="button" id="b_share">PDF per Mail an Foto Schuh senden</button>
         <button type="button" class="ghost" id="b_save">PDF speichern</button>
       </div>
       <p class="note" id="d_noshare" hidden>Dieses Gerät kann die PDF nicht direkt teilen. Bitte „PDF speichern“ und in der Mail-App als Anhang anfügen.</p>
@@ -283,7 +285,7 @@ function init() {
   $("contact").innerHTML = `${esc(S.name)} · ${esc(S.strasse)} · ${esc(S.ort)}<br>${esc(S.tel)} · ${esc(S.mail)}`;
   $("sum_who").textContent = `${S.name} (Inh. ${S.inhaber}, ${S.strasse}, ${S.ort})`;
   $("sum_mail").textContent = S.mail;
-  ["f_vor","f_nach","f_str","f_plz","f_ort","f_mail","f_tel","c_read","c_copy"].forEach(id => $(id).addEventListener("input", () => clearErr($(id))));
+  ["f_name","f_str","f_plz","f_ort","f_mail","f_tel","c_read","c_copy"].forEach(id => $(id).addEventListener("input", () => clearErr($(id))));
   document.querySelectorAll('input[name="ref"]').forEach(r => r.addEventListener("change", () => clearErr($("ref_row"))));
   ["padA","padB"].forEach(id => $(id).addEventListener("pointerdown", () => clearErr($(id))));
   $("t_consent").innerHTML = CONSENT().map(t => `<p>${esc(t)}</p>`).join("");
@@ -298,20 +300,20 @@ function init() {
   let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { pads.A.size(); pads.B.size(); }, 150); });
   $("b_sign").addEventListener("click", sign);
   $("b_share").addEventListener("click", share);
-  $("b_copy").addEventListener("click", () => copyRcpt(true));
   $("b_save").addEventListener("click", () => PDF && PDF.save(FILE.name));
   $("b_next").addEventListener("click", reset);
 }
 const refVal = () => (document.querySelector('input[name="ref"]:checked') || {}).value || "";
 
+/* „Anna Maria Müller“ → Vorname „Anna Maria“, Nachname „Müller“ (für PDF und Dateiname) */
+function splitName(n) { const p = n.trim().split(/\s+/).filter(Boolean); return p.length < 2 ? { vor: p[0] || "", nach: "" } : { vor: p.slice(0, -1).join(" "), nach: p[p.length - 1] }; }
 function collect() {
-  return { datum: $("f_datum").value || today(), vor: val("f_vor"), nach: val("f_nach"), str: val("f_str"),
+  return { datum: $("f_datum").value || today(), ...splitName(val("f_name")), str: val("f_str"),
     plz: val("f_plz"), ort: val("f_ort"), mail: val("f_mail"), tel: val("f_tel"), kids: val("f_kids"), ref: refVal() };
 }
 function validate(d) {
   const e = [], add = (el, msg) => e.push({ el, msg });
-  if (!d.vor) add($("f_vor"), "Bitte Vornamen eintragen.");
-  if (!d.nach) add($("f_nach"), "Bitte Nachnamen eintragen.");
+  if (!d.vor || !d.nach) add($("f_name"), "Bitte Vor- und Nachnamen eintragen.");
   if (!d.str) add($("f_str"), "Bitte Straße und Hausnummer eintragen.");
   if (!d.plz) add($("f_plz"), "Bitte PLZ eintragen.");
   if (!d.ort) add($("f_ort"), "Bitte Ort eintragen.");
@@ -359,7 +361,7 @@ async function sign() {
     FILE = new File([PDF.output("blob")], `Einwilligung_${safe(d.nach)}_${safe(d.vor)}_${d.datum}.pdf`, { type: "application/pdf" });
     RCPT = (!QR && $("c_copy").checked && d.mail) ? `${S.mail}, ${d.mail}` : S.mail;
     $("d_rcpt_lbl").textContent = RCPT.includes(",") ? "Die Adressen sind schon kopiert:" : "Die Adresse ist schon kopiert:";
-    $("d_rcpt").textContent = RCPT;
+    $("d_rcpt").innerHTML = RCPT.split(", ").map(esc).join("<br>");
     const canShare = !!(navigator.canShare && navigator.canShare({ files: [FILE] }));
     $("b_share").hidden = !canShare; $("d_noshare").hidden = canShare;
     $("form").hidden = true; $("done").hidden = false; window.scrollTo(0, 0);
@@ -371,18 +373,16 @@ async function sign() {
 
 function copyRcpt(feedback) {
   const p = navigator.clipboard ? navigator.clipboard.writeText(RCPT) : Promise.reject();
-  if (feedback) p.then(() => { $("b_copy").textContent = "Kopiert ✓"; setTimeout(() => $("b_copy").textContent = "Adresse kopieren", 2000); })
-    .catch(() => { $("b_copy").textContent = "Bitte abtippen"; });
   return p.catch(() => {});
 }
 function share() {
   copyRcpt(false);                 // Empfänger in die Zwischenablage, dann direkt teilen
-  const name = val("f_vor") + " " + val("f_nach");
+  const name = val("f_name").replace(/\s+/g, " ");
   navigator.share({ files: [FILE], title: "Einwilligung Fotoaufnahmen – " + name,
     text: `Einwilligung zur Erstellung von Fotoaufnahmen – ${name}, ${dDE($("f_datum").value)}\n\nBitte an folgende E-Mail-Adresse${RCPT.includes(",") ? "n" : ""} senden:\n${RCPT.split(", ").join("\n")}` }).catch(() => {});
 }
 function reset() {
-  ["f_vor", "f_nach", "f_str", "f_plz", "f_ort", "f_mail", "f_tel", "f_kids"].forEach(id => $(id).value = "");
+  ["f_name", "f_str", "f_plz", "f_ort", "f_mail", "f_tel", "f_kids"].forEach(id => $(id).value = "");
   $("f_datum").value = today(); $("c_read").checked = false; $("c_copy").checked = false; $("kids_note").hidden = true;
   document.querySelectorAll('input[name="ref"]').forEach(r => r.checked = false); $("sigBwrap").hidden = true;
   document.querySelectorAll(".ferr").forEach(n => n.remove()); document.querySelectorAll(".invalid").forEach(n => n.classList.remove("invalid")); $("err").hidden = true;
@@ -474,7 +474,10 @@ async function buildPDF(d, s) {
   // Fußzeile
   const n = doc.getNumberOfPages();
   for (let i = 1; i <= n; i++) { doc.setPage(i); font(7.5, "normal", MUTED);
-    doc.text(`${S.name} · Einwilligung ${d.vor} ${d.nach} · ${dDE(d.datum)}`, M, 290);
+    /* Fußzeile: sehr lange Namen kürzen, damit sie nicht in „Seite x von y“ laufen (oben im Dokument steht der volle Name) */
+    let nm = `${d.vor} ${d.nach}`; const maxW = W - 30;
+    while (nm.length > 3 && doc.getTextWidth(`${S.name} · Einwilligung ${nm} · ${dDE(d.datum)}`) > maxW) nm = nm.slice(0, -2).trimEnd() + "…";
+    doc.text(`${S.name} · Einwilligung ${nm} · ${dDE(d.datum)}`, M, 290);
     doc.text(`Seite ${i} von ${n}`, 210 - M, 290, { align: "right" }); }
   return doc;
 }
